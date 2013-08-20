@@ -1,0 +1,23 @@
+/* Estilos personalizados*/
+@font-face
+{
+font-family: myFirstFont;
+src: url(sansation_bold.woff);
+font-size: 14px;
+font-weight:bold;
+}
+
+body {
+	background-color: #66CCCC;
+}
+
+footer{
+	background-color: #3366FF;
+	font:bold 15px arial,sans-serif;
+	text-align: center;;
+}
+
+header{
+	background-color: #003399;
+	color: #FFFFFF;
+}

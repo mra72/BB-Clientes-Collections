@@ -1,0 +1,88 @@
+// Filename: router.js
+define([
+  'jquery',
+  'underscore',
+  'backbone',
+  'views/contenidoView',
+  'models/clientModel',
+  'collections/clientsCollection'
+], function($, _, Backbone, ContenidoView,Client, Clients){
+  var AppRouter = Backbone.Router.extend({
+    routes: {
+   	
+      // Default
+      '*actions': 'defaultAction'
+    }
+  });
+
+  var initialize = function(){
+    var app_router = new AppRouter;
+    window.App.router=app_router;
+    app_router.on('route:defaultAction', function(actions){
+      console.log('routers');
+
+      //******************************
+      var client_model = new Client();//Crea el modelo.       
+
+        //Creamos un CLIENTE
+        client_model.set({dni:'111R', nombre:'Manuel', edad:40, Profesion:'Desarrollador'});
+        
+        //Una vez creado mostramos el nombre por la consola
+        console.log(client_model.get('nombre'));
+
+        //Mostramos los atributos del Modelo creado
+        console.log(client_model.attributes);
+
+        //Añadimos un nuevo telefono al array de telefonos, posibles, del cliente y mostramos resultado
+        //en consola.
+         client_model.nuevoTelefono('890002233');
+         console.log(client_model.get('telefonos'));
+
+
+        //Añadimos un nuevo telefono al array de telefonos, posibles, del cliente y mostramos resultado
+          //en consola.
+         client_model.nuevoTelefono('991202233');
+         console.log(client_model.get('telefonos'));
+
+         client_model.set({nombre:'Aaron',edad:15});
+         console.log(client_model.get('nombre'));
+
+         console.log(client_model.cid); 
+
+         console.log(client_model.get('dni'));
+
+         //COLECCIONES
+         var clients_collection = new Clients();
+         console.log(clients_collection);
+
+         //Creada la instancia de la coleccion, pasamos 
+         //a crear una coleccion o ampliar la existente.
+        clients_collection.add([{nombre:'Alfonso', edad:23}, 
+                      {nombre:'Javier', edad:35}]);
+        
+        console.log(clients_collection.models[0].attributes);
+        console.log(clients_collection.at(0));
+
+        //Longitud de la Coleccion
+        console.log(clients_collection.length);
+
+
+        console.log(clients_collection.models[0]);
+
+        //Convierte a formato JSON la coleccion
+        alert(JSON.stringify(clients_collection));
+
+      //******************************
+
+      var contenidoView = new ContenidoView({model: clients_collection});
+      //clients_collection.fetch();
+      
+      contenidoView.render();
+
+    });
+    Backbone.history.start();
+  };
+  return {
+    initialize: initialize
+  };
+});

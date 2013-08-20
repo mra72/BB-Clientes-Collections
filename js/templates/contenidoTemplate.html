@@ -1,0 +1,22 @@
+<h3> Listado de Clientes </h3>
+<table class='table table-hover'>
+				<thead>
+					<th>Nombre</th>
+					<th>Edad</th>
+				</thead>
+				<tbody>
+
+<%
+		_.each(obj,function(client){%>
+			<%alert(client.nombre)%>
+			
+					<tr>
+						<td><%- client.nombre %></td>
+						<td><%- client.edad %></td>
+					</tr>
+				
+		<%});
+%>
+
+	</tbody>
+</table>
